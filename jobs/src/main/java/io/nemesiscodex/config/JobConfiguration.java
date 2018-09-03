@@ -11,6 +11,6 @@ public class JobConfiguration {
 
     @Bean
     public ExecutorService jobExecutor() {
-        return Executors.newSingleThreadExecutor();
+        return Executors.newScheduledThreadPool(1);
     }
 }
