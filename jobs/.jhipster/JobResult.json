@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "result",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "creationDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "jobKey",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180716125223",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "job_result",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no",
+    "microserviceName": "jobs",
+    "searchEngine": false
+}

@@ -1,0 +1,37 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Welcome!</h1>
+
+            <div ng-switch="vm.isAuthenticated()">
+
+                <div class="alert alert-success" ng-switch-when="true">
+                    You are logged in as user "{{vm.account.login}}".
+                </div>
+
+                <div class="alert alert-danger" ng-switch-when="false">
+                    Please, <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
+                </div>
+
+                <div ng-switch-when="true">
+                    <ul>
+                        <li><input ng-model="vm.echoMessage" name="message" value="A message"><a class="btn btn-default" ng-click="vm.echo()">Echo</a></li>
+                        <li><input ng-model="vm.echoErrorMessage" name="message" value="A message"><a class="btn btn-default" ng-click="vm.echoError()">Echo error</a></li>
+                        <li><input ng-model="vm.jobMessage" name="message" value="A message"><a class="btn btn-default" ng-click="vm.job()">Job</a></li>
+                        <li><input ng-model="vm.jobErrorMessage" name="message" value="A message"><a class="btn btn-default" ng-click="vm.jobError()">Job error</a></li>
+                        <li><input ng-model="vm.storeMessage" name="message" value="A message"><a class="btn btn-default" ng-click="vm.store()">Store</a></li>
+                        <li><input ng-model="vm.storeErrorMessage" name="message" value="A message"><a class="btn btn-default" ng-click="vm.storeError()">Store error</a></li>
+                    </ul>
+
+                    <div>
+                        <p>Status: {{vm.resultStatus}}</p>
+                        Result:
+                        <pre>{{vm.result}}</pre>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
