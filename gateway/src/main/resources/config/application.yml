@@ -124,13 +124,10 @@ jhipster:
     ribbon:
         display-on-active-profiles: dev
 
-# ===================================================================
-# Application specific properties
-# Add your own application properties here, see the ApplicationProperties class
-# to have type-safe configuration, like in the JHipsterProperties above
-#
-# More documentation is available at:
-# http://www.jhipster.tech/common-application-properties/
-# ===================================================================
 
-application:
+# 1. Create a java project in sentry
+# 2. Go to the project's Settings -> Client Keys (DSN)
+# 3. Copy the dsn here
+# 4. add ?stacktrace.app.packages=<app package name>
+sentry:
+    dsn: http://d8db495fb45b47f9b901d964ef7f4dfd@localhost:9000/2?stacktrace.app.packages=io.nemesiscodex

@@ -43,3 +43,56 @@ services:
       - 16686:16686
       - 14268:14268
       - 9411:9411
+
+  #########################
+  # Sentry.io config
+  #########################
+  sentry-redis:
+    image: redis
+  sentry-postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: sentry
+      POSTGRES_PASSWORD: sentry
+      POSTGRES_DB: sentry
+
+  sentry:
+    image: sentry
+    links:
+    - sentry-redis
+    - sentry-postgres
+    ports:
+    - 9000:9000
+    environment:
+      SENTRY_SECRET_KEY: '6e261ca6e11c45849d961792749f7c6d'
+      SENTRY_POSTGRES_HOST: sentry-postgres
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: sentry-redis
+
+  cron:
+    image: sentry
+    links:
+    - sentry-redis
+    - sentry-postgres
+    command: "sentry run cron"
+    environment:
+      SENTRY_SECRET_KEY: '6e261ca6e11c45849d961792749f7c6d'
+      SENTRY_POSTGRES_HOST: sentry-postgres
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: sentry-redis
+
+  worker:
+    image: sentry
+    links:
+    - sentry-redis
+    - sentry-postgres
+    command: "sentry run worker"
+    environment:
+      SENTRY_SECRET_KEY: '6e261ca6e11c45849d961792749f7c6d'
+      SENTRY_POSTGRES_HOST: sentry-postgres
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: sentry
+      SENTRY_REDIS_HOST: sentry-redis
+
