@@ -1,5 +1,8 @@
 package io.nemesiscodex.config;
 
+import com.codahale.metrics.MetricFilter;
+import com.codahale.metrics.graphite.Graphite;
+import com.codahale.metrics.graphite.GraphiteReporter;
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.config.metrics.SpectatorLogMetricWriter;
 
@@ -26,6 +29,7 @@ import org.springframework.context.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.lang.management.ManagementFactory;
+import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -87,6 +91,18 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
                 .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .build();
             reporter.start(jHipsterProperties.getMetrics().getLogs().getReportFrequency(), TimeUnit.SECONDS);
+        }
+
+        JHipsterProperties.Metrics.Graphite graphiteConfig = jHipsterProperties.getMetrics().getGraphite();
+        if (graphiteConfig.isEnabled()) {
+            final Graphite graphite = new Graphite(new InetSocketAddress(graphiteConfig.getHost(), graphiteConfig.getPort()));
+            final GraphiteReporter reporter = GraphiteReporter.forRegistry(metricRegistry)
+                .prefixedWith(graphiteConfig.getPrefix())
+                .convertRatesTo(TimeUnit.SECONDS)
+                .convertDurationsTo(TimeUnit.MILLISECONDS)
+                .filter(MetricFilter.ALL)
+                .build(graphite);
+            reporter.start(5, TimeUnit.SECONDS);
         }
     }
 

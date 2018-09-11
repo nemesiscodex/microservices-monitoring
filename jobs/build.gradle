@@ -203,6 +203,7 @@ dependencies {
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
     compile 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:0.2.1'
     compile 'io.sentry:sentry-spring:1.7.5'
+    compile 'io.dropwizard.metrics:metrics-graphite:3.2.6'
     testCompile "com.jayway.jsonpath:json-path"
     testCompile ("org.springframework.boot:spring-boot-starter-test") {
         exclude group: 'com.vaadin.external.google', module: 'android-json'

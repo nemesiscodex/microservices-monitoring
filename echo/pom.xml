@@ -292,6 +292,12 @@
             <artifactId>sentry-spring</artifactId>
             <version>1.7.5</version>
         </dependency>
+        <!-- graphite -->
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-graphite</artifactId>
+            <version>3.2.6</version>
+        </dependency>
         <!-- Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>

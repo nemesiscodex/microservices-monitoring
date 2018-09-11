@@ -96,3 +96,20 @@ services:
       SENTRY_DB_PASSWORD: sentry
       SENTRY_REDIS_HOST: sentry-redis
 
+  #########################
+  # Graphite & Grafana
+  #########################
+  graphite:
+    image: hopsoft/graphite-statsd
+    ports:
+      - 9091:80
+      - 2003-2004:2003-2004
+      - 2023-2024:2023-2024
+      - 8125:8125/udp
+      - 8126:8126
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    links:
+      - graphite
